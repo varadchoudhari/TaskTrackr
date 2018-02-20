@@ -5,6 +5,7 @@
 <%= link "Add Task", to: task_path(@conn, :new), class: "btn btn-primary"%>
 </div>
 <div class="p-3"></div>
+<%= if length(@tasks) != 0 do %>
 <%= Enum.map @tasks, fn task -> %>
 <div class="row">
   <div class="col">
@@ -38,7 +39,7 @@
             <p>Time taken <%= task.time_taken %> minutes</p>
           </div>
           <div class="col-md-3">
-            <%= if task.user.id == @current_user.id do %>
+            <%= if task.user.id == @current_user.id || task.assigned.id == @current_user.id do %>
             <div class="float-right">
               <div class="btn-group">
                 <%= link "Edit", to: task_path(@conn, :edit, task), class: "btn-sm btn-secondary" %>
@@ -53,4 +54,15 @@
   </div>
 </div>
 <div class="p-3"></div>
+<% end %>
+<% else %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h2> Nothing to show. Create a task by clicking on <span class="btn btn-primary">Add Task</span> button above </h2>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>

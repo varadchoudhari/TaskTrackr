@@ -13,7 +13,7 @@ defmodule TasktrackerWeb.SessionController do
       |> redirect(to: "/feed")
     else
       conn
-      |> put_flash(:error, "Cannot create session")
+      |> put_flash(:error, "Invalid Username, please re-login or register if not already a user")
       |> redirect(to: page_path(conn, :index))
     end
   end

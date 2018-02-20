@@ -9,6 +9,7 @@
 </div>
 </div>
 <div class="p-3"></div>
+<%= if length(Enum.filter(@tasks, fn(task) -> task.assigned.id == @current_user.id end)) != 0 do %>
 <%= Enum.map @tasks, fn task -> %>
 <%= if task.assigned_id == @current_user.id do %>
 <div class="row">
@@ -59,4 +60,15 @@
 </div>
 <div class="p-3"></div>
 <% end %>
+<% end %>
+<% else %>
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h2> No tasks assigned to you </h2>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>
