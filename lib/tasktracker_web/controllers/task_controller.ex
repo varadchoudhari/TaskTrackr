@@ -17,13 +17,14 @@ defmodule TasktrackerWeb.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
+    users = Accounts.list_users()
     case Work.create_task(task_params) do
       {:ok, task} ->
         conn
         |> put_flash(:info, "Task created successfully.")
         |> redirect(to: page_path(conn, :feed))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, users: users)
     end
   end
 

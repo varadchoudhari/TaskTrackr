@@ -5,12 +5,12 @@ defmodule Tasktracker.Work.Task do
 
 
   schema "tasks" do
-    field :body, :string
+    field :body, :string, null: false
     field :completed, :boolean, default: false
-    field :title, :string
+    field :title, :string, null: false
     belongs_to :user, Tasktracker.Accounts.User, foreign_key: :user_id
     belongs_to :assigned, Tasktracker.Accounts.User, foreign_key: :assigned_id
-    field :time_taken, :string
+    field :time_taken, :string, null: false
 
     timestamps()
   end
