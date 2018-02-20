@@ -17,8 +17,10 @@ defmodule TasktrackerWeb.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
+    IO.inspect task_params, label: "conn"
+    new_params = Map.put(task_params, "user_id", conn.assigns.current_user.id)
     users = Accounts.list_users()
-    case Work.create_task(task_params) do
+    case Work.create_task(new_params) do
       {:ok, task} ->
         conn
         |> put_flash(:info, "Task created successfully.")

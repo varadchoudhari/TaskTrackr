@@ -5,16 +5,6 @@
 </div>
 <% end %>
 
-<%= if Map.get(f.data, :assigned_id) == nil do %>
-<div class="invisible">
-  <%= text_input f, :user_id, class: "form-control", value: @current_user.id %>
-</div>
-<% else %>
-<div class="invisible">
-  <%= text_input f, :user_id, class: "form-control", value: Map.get(f.data, :user_id) %>
-</div>
-<% end %>
-
 <div class="form-group">
   <%= label f, :title, class: "control-label" %>
   <%= text_input f, :title, class: "form-control" %>
@@ -27,11 +17,7 @@
   <%= error_tag f, :body %>
 </div>
 
-<%= if Map.get(f.data, :assigned_id) == nil do %>
-<div class="invisible">
-  <%= checkbox f, :completed, class: "checkbox", value: false %>
-</div>
-<% else %>
+<%= if Map.get(f.data, :assigned_id) != nil do %>
 <div class="form-group">
   <%= label f, :completed, class: "control-label" %>
   <%= checkbox f, :completed, class: "checkbox" %>
