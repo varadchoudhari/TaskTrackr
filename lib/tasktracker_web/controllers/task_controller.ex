@@ -17,7 +17,6 @@ defmodule TasktrackerWeb.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
-    IO.inspect task_params, label: "conn"
     new_params = Map.put(task_params, "user_id", conn.assigns.current_user.id)
     users = Accounts.list_users()
     case Work.create_task(new_params) do
@@ -44,14 +43,14 @@ defmodule TasktrackerWeb.TaskController do
 
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Work.get_task!(id)
-
+    users = Accounts.list_users()
     case Work.update_task(task, task_params) do
       {:ok, task} ->
         conn
         |> put_flash(:info, "Task updated successfully.")
         |> redirect(to: page_path(conn, :feed))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", task: task, changeset: changeset)
+        render(conn, "edit.html", task: task, changeset: changeset, users: users)
     end
   end
 
