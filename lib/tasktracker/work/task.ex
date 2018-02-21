@@ -21,12 +21,12 @@ defmodule Tasktracker.Work.Task do
     |> cast(attrs, [:title, :body, :completed, :user_id, :assigned_id, :time_taken])
     |> validate_required([:title, :body, :completed, :user_id, :assigned_id, :time_taken])
     |> validate_change(:time_taken, fn :time_taken, time ->
-        if rem(time, 15) != 0 do
-          [time_taken: "Invalid time, please enter in the multiples of 15"]
-        else
-          []
-        end
+      if rem(time, 15) != 0 do
+        [time_taken: "Invalid time, please enter in the multiples of 15"]
+      else
+        []
       end
-      )
+    end
+    )
   end
 end

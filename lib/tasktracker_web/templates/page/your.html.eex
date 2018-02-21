@@ -1,11 +1,11 @@
 <div class="row">
-<div class="col-md-9">
-<h2 class="display-4"> Tasks assigned to you </h2>
-</div>
-<div class="col-md-3">
-  <div class="float-right">
-<%= link "Back", to: page_path(@conn, :feed), class: "btn-lg btn-secondary" %>
-</div>
+  <div class="col-md-9">
+    <h2 class="display-4"> Tasks assigned to you </h2>
+  </div>
+  <div class="col-md-3">
+    <div class="float-right">
+    <%= link "Back", to: page_path(@conn, :feed), class: "btn-lg btn-secondary" %>
+  </div>
 </div>
 </div>
 <div class="p-3"></div>

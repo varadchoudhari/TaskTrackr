@@ -24,42 +24,42 @@ defmodule TasktrackerWeb.TaskController do
         conn
         |> put_flash(:info, "Task created successfully.")
         |> redirect(to: page_path(conn, :feed))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, users: users)
-    end
-  end
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "new.html", changeset: changeset, users: users)
+        end
+      end
 
-  def show(conn, %{"id" => id}) do
-    task = Work.get_task!(id)
-    render(conn, "show.html", task: task)
-  end
+      def show(conn, %{"id" => id}) do
+        task = Work.get_task!(id)
+        render(conn, "show.html", task: task)
+      end
 
-  def edit(conn, %{"id" => id}) do
-    task = Work.get_task!(id)
-    changeset = Work.change_task(task)
-    users = Accounts.list_users()
-    render(conn, "edit.html", task: task, changeset: changeset, users: users)
-  end
-
-  def update(conn, %{"id" => id, "task" => task_params}) do
-    task = Work.get_task!(id)
-    users = Accounts.list_users()
-    case Work.update_task(task, task_params) do
-      {:ok, task} ->
-        conn
-        |> put_flash(:info, "Task updated successfully.")
-        |> redirect(to: page_path(conn, :feed))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      def edit(conn, %{"id" => id}) do
+        task = Work.get_task!(id)
+        changeset = Work.change_task(task)
+        users = Accounts.list_users()
         render(conn, "edit.html", task: task, changeset: changeset, users: users)
-    end
-  end
+      end
 
-  def delete(conn, %{"id" => id}) do
-    task = Work.get_task!(id)
-    {:ok, _task} = Work.delete_task(task)
+      def update(conn, %{"id" => id, "task" => task_params}) do
+        task = Work.get_task!(id)
+        users = Accounts.list_users()
+        case Work.update_task(task, task_params) do
+          {:ok, task} ->
+            conn
+            |> put_flash(:info, "Task updated successfully.")
+            |> redirect(to: page_path(conn, :feed))
+            {:error, %Ecto.Changeset{} = changeset} ->
+              render(conn, "edit.html", task: task, changeset: changeset, users: users)
+            end
+          end
 
-    conn
-    |> put_flash(:info, "Task deleted successfully.")
-    |> redirect(to: page_path(conn, :feed))
-  end
-end
+          def delete(conn, %{"id" => id}) do
+            task = Work.get_task!(id)
+            {:ok, _task} = Work.delete_task(task)
+
+            conn
+            |> put_flash(:info, "Task deleted successfully.")
+            |> redirect(to: page_path(conn, :feed))
+          end
+        end
