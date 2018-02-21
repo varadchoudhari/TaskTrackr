@@ -29,6 +29,9 @@ I have kept a separate index that shows a list of tasks that are assigned to the
 **9. Redirecting to feed if already logged in**   
 If a user is already logged in, then, on starting the application again in a different tab will redirect to that user's feed instead of loading the login page again.
 
+**10. 15-minute increments**
+I have used stepper at the front-end to set time in 15-minute increments. In addition to that, I have also validated it (whether the entered time is in 15-minute increments) at the server side before storing it in the database. 
+
 ## Running the application
 
 To start your Phoenix server:
