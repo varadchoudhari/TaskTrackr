@@ -1,5 +1,9 @@
 # Task Trackr.
 
+## Screenshot
+
+![](https://github.com/varadchoudhari/TaskTrackr/blob/master/screenshot.png)
+
 ## Design Decisions
 
 **1. Unique users**   
